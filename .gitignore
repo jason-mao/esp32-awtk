@@ -1,0 +1,32 @@
+.config
+*.o
+*.pyc
+
+# gtags
+GTAGS
+GRTAGS
+GPATH
+
+# emacs
+.dir-locals.el
+
+
+# eclipse setting
+.settings
+
+# MacOS directory files
+.DS_Store
+
+# Example project files
+# examples/**/sdkconfig
+examples/**/sdkconfig.old
+examples/**/build
+
+# gcov coverage reports
+*.gcda
+*.gcno
+coverage.info
+coverage_report/
+
+# VS Code Settings
+.vscode/
