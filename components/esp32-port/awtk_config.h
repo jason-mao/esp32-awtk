@@ -41,6 +41,30 @@
 #define WITH_NULL_IM 1
 
 /**
+ * 如果支持极速模式，请定义本宏。极速模式不支持控件透明半透明效果，只有在CPU配置极低时启用。
+ *
+ * #define USE_FAST_MODE 1
+ */
+
+/**
+ * 如果有标准的malloc/free/calloc等函数，请定义本宏
+ *
+ */
+// #define HAS_STD_MALLOC 1
+
+/**
+ * 如果有标准的fopen/fclose等函数，请定义本宏
+ *
+ */
+#define HAS_STDIO 1
+
+/**
+ * 如果有优化版本的memcpy函数，请定义本宏
+ *
+ */
+#define HAS_FAST_MEMCPY 1
+
+/**
  * 如果禁用控件动画，请定义本宏
  *
  */
@@ -59,5 +83,7 @@
 #define WITHOUT_DIALOG_HIGHLIGHTER 1
 
 #define WITHOUT_EXT_WIDGETS 1
+
+#define FRAGMENT_FRAME_BUFFER_SIZE 32 * 1024
 
 #endif/*AWTK_CONFIG_H*/

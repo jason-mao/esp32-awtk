@@ -18,9 +18,9 @@ GPATH
 .DS_Store
 
 # Example project files
-# examples/**/sdkconfig
-examples/**/sdkconfig.old
-examples/**/build
+# example/**/sdkconfig
+example/**/sdkconfig.old
+example/**/build
 
 # gcov coverage reports
 *.gcda

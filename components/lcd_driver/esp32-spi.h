@@ -21,6 +21,7 @@ extern "C" {
 
 #include <stdint.h>
 #include <stdbool.h>
+#include "esp_types.h"
 
 #define FSPI  1 //SPI bus attached to the flash (can use the same data lines but different SS)
 #define HSPI  2 //SPI bus normally mapped to pins 12 - 15, but can be matrixed to any pins

@@ -28,30 +28,6 @@
 #include "freertos/task.h"
 #include <sys/time.h>
 
-uint64_t get_time_ms64() {
-  struct timeval te;
-  gettimeofday(&te, NULL);
-  uint64_t milliseconds = te.tv_sec * 1000LL + te.tv_usec / 1000;
-  return milliseconds;
-}
-
-static void sleep_ms_raw(uint32_t ms) {
-  uint32_t count = 0;
-  uint64_t start = get_time_ms64();
-
-  while (get_time_ms64() < (start + ms)) {
-    count++;
-  }
-}
-
-void sleep_ms(uint32_t ms) {
-  vTaskDelay(1 / portTICK_PERIOD_MS);
-  // if (tos_knl_is_running()) {
-  //   tos_task_delay(ms);
-  // } else {
-  //   sleep_ms_raw(ms);
-  // }
-}
 
 static bool_t s_inited = FALSE;
 static uint32_t s_heam_mem[4096];

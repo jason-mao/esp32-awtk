@@ -24,6 +24,7 @@
 #include "esp_log.h"
 #include "base/idle.h"
 #include "base/timer.h"
+#include "lcd/lcd_reg.h"
 #include "lcd/lcd_mem_bgr565.h"
 #include "main_loop/main_loop_simple.h"
 
@@ -32,13 +33,15 @@
 /*----------------------------------------------------------------------------*/
 
 // static struct aw_ts_state s_ts_state = {0};
-typdef struct {
+typedef struct {
   int x;
   int y;
   int pressed;
 } touch_info_t;
 
-
+static lcd_t* platform_create_lcd(wh_t w, wh_t h) {
+  return lcd_reg_create(w, h);
+}
 #define TS_STACK_SIZE 2 * 1024
 static void __awtk_loop_task_entry(void *p_arg)
 {
@@ -66,23 +69,26 @@ static void __awtk_loop_task_entry(void *p_arg)
     }
   }
 }
-
-ret_t platform_disaptch_input(main_loop_t* loop) {
-  static TaskHandle_t loop_handle = NULL;
-  if(loop_handle==NULL) {
-      if (xTaskCreatePinnedToCore(__awtk_loop_task_entry,
-                                "awtk_loop_task_entry",
-                                4096,
-                                NULL,
-                                5,
-                                &loop_handle, 0) != pdTRUE) {
-        ESP_LOGE(TAG, "Error create AWTK main loop task");
-  }
-
-  }
-
+ret_t platform_disaptch_input(main_loop_t* l) {
   return RET_OK;
 }
+
+// ret_t platform_disaptch_input(main_loop_t* loop) {
+//   static TaskHandle_t loop_handle = NULL;
+//   if(loop_handle==NULL) {
+//       if (xTaskCreatePinnedToCore(__awtk_loop_task_entry,
+//                                 "awtk_loop_task_entry",
+//                                 4096,
+//                                 NULL,
+//                                 5,
+//                                 &loop_handle, 0) != pdTRUE) {
+//         ESP_LOGE("TAG", "Error create AWTK main loop task");
+//   }
+
+//   }
+
+//   return RET_OK;
+// }
 
 /*----------------------------------------------------------------------------*/
 /* frame buffer刷新操作                                                       */
