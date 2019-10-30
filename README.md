@@ -6,5 +6,7 @@
 
 
 # Todo list
-- [ ] Porting awtk to support ESP32
-- [ ] Support touch events
+- [x] Porting awtk to support ESP32
+- [x] Running first demo on ESP-WROVER-KIT
+- [ ] Support touch input events
+- [ ] Implement framebuffer to improve speed
