@@ -70,6 +70,7 @@ static void __awtk_loop_task_entry(void *p_arg)
   }
 }
 ret_t platform_disaptch_input(main_loop_t* l) {
+  // ESP_LOGI("ESP32_LOOP","%s-%d", __func__, __LINE__);
   return RET_OK;
 }
 

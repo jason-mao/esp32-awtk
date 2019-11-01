@@ -21,13 +21,26 @@
 #define LCD_SPI_ORDER   SPI_MSBFIRST
 
 // Wrover-Kit
-#define LCD_SPI_SCK     19
-#define LCD_SPI_MISO    25
-#define LCD_SPI_MOSI    23
-#define LCD_SPI_CS      22
-#define LCD_SPI_DC      21
+// #define LCD_SPI_SCK     19
+// #define LCD_SPI_MISO    25
+// #define LCD_SPI_MOSI    23
+// #define LCD_SPI_CS      22
+// #define LCD_SPI_DC      21
+// #define LCD_SPI_RST     18
+// #define LCD_SPI_BL      5
+
+// ESP32_LCD_EB_V1
+#define LCD_SPI_SCK     22
+#define LCD_SPI_MISO    27
+#define LCD_SPI_MOSI    21
+#define LCD_SPI_CS      5
+#define LCD_SPI_DC      19
 #define LCD_SPI_RST     18
-#define LCD_SPI_BL      5
+#define LCD_SPI_BL      23
+
+#define TOUCH_SPI_CS    32
+#define TOUCH_SPI_IRQ   33
+
 
 #define VIDEO_FRAME_SIZE           (320*240*2)
 #define LCD_RENDER_TASK_STACK      (3*1024)
@@ -58,11 +71,18 @@ static void __awtk_task_entry(void *p_arg) {
     ESP_LOGI(TAG, "__awtk_task_entry deleted");
     vTaskDelete(NULL);
 }
+#include "iot_xpt2046.h"
 
+void xpt2046_touch_init(void)
+{
+    touch_calibration(320, 240, 1);
+}
 static void _lcd_render_task(void *pv)
 {
     ESP_LOGI(TAG, "Start LCD render task");
+    xpt2046_touch_init();
     setup_ili9341();
+
     if (xTaskCreatePinnedToCore(__awtk_task_entry,
                                 "__awtk_task_entry",
                                 4096,
